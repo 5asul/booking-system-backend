@@ -1,0 +1,33 @@
+@startuml
+class User {
+  +id: int
+  +username: String
+  +email: String
+  +password: String
+  +createdAt: DateTime
+}
+
+class BlogPost {
+  +id: int
+  +title: String
+  +content: String
+  +status: PostStatus
+  +createdAt: DateTime
+}
+
+class Comment {
+  +id: int
+  +content: String
+  +createdAt: DateTime
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+User "1" --> "0..*" BlogPost : writes
+BlogPost "1" --> "0..*" Comment : has
+User "1" --> "0..*" Comment : writes
+@enduml

@@ -1,0 +1,16 @@
+' Sequence Diagram (Create Post)
+
+@startuml
+actor Author
+participant "PostController" as PC
+participant "PostService" as PS
+participant Database
+
+Author -> PC: CreatePostRequest(title, content)
+PC -> PS: createPost(userId, request)
+PS -> Database: Save new BlogPost
+Database --> PS: Created BlogPost
+PS --> PC: BlogPostDTO
+PC --> Author: Redirect to Dashboard
+@enduml
+

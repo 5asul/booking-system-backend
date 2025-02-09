@@ -1,0 +1,15 @@
+' Sequence Diagram (Add Comment)
+
+@startuml
+actor User
+participant "CommentController" as CC
+participant "CommentService" as CS
+participant Database
+
+User -> CC: AddCommentRequest(postId, content)
+CC -> CS: createComment(userId, postId, request)
+CS -> Database: Save new Comment
+Database --> CS: Created Comment
+CS --> CC: CommentDTO
+CC --> User: Update comments section
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+start
+:Visit Blog;
+if (Authenticated?) then (Yes)
+  :View Dashboard;
+  repeat
+    :Choose Action;
+    if (Create Post?) then (Yes)
+      :Write and Publish Post;
+    elseif (Edit Post?) then (Yes)
+      :Modify Post Content;
+    elseif (Add Comment?) then (Yes)
+      :Post Comment;
+    endif
+  repeat while (Continue?) is (Yes)
+  stop
+else (No)
+  :View Public Posts;
+  if (Want to Interact?) then (Yes)
+    :Register/Login;
+  else (No)
+    stop
+  endif
+endif
+@enduml

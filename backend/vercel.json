@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "src/app.ts",
+        "use": "@vercel/node",
+        "config": {
+          "includeFiles": [
+            "prisma/**",
+            "src/**/*.ts"
+          ]
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "src/app.ts"
+      }
+    ]
+  }

@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+  
+ 
+}
+
+// Enum for post status
+//  enum PostStatus {
+//   DRAFT
+//   PUBLISHED
+//   ARCHIVED
+// }
+
+
+// User Model
+model User {
+  id         Int    @id @default(autoincrement())
+  username   String    @unique
+  email      String    @unique
+  password   String
+  createdAt  DateTime  @default(now())
+  updatedAt DateTime @updatedAt
+  posts      BlogPost[]
+  comments   Comment[]
+}
+
+// Blog Post Model
+model BlogPost {
+  id         Int        @id @default(autoincrement())
+  title      String
+  content    String
+  image      String?    // Base64-encoded image data
+  status     Int @default(1)
+  createdAt  DateTime   @default(now())
+  author     User       @relation(fields: [authorId], references: [id])
+  authorId   Int
+  comments   Comment[]
+}
+
+// Comment Model
+model Comment {
+  id        Int    @id @default(autoincrement())
+  content   String
+  createdAt DateTime  @default(now())
+  post      BlogPost  @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    Int
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+
