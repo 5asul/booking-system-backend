@@ -1,14 +1,97 @@
+import { userTable,appointmentTable } from "../../config/db";
+import { Role } from "../../models/Role";
+import { CreateAppointmentInput, GetAppointments, GetDoctor } from "../../types/patent";
 import { patentInterface } from "../interfaces/patentInterface";
 
 export const patentService:patentInterface={
     
-    bookAppointment: function (patentId: number, doctorId: number, appointmentDate: string): Promise<void> {
-        throw new Error("Function not implemented.");
+    bookAppointment:async function (appointment:CreateAppointmentInput): Promise<GetAppointments> {
+
+        try {
+            const checkPatentId = await userTable.findFirst(
+                {where:{
+                  id:appointment.patentId,
+                  
+                }}
+              )
+        
+              if (!checkPatentId) {
+                throw new Error("You are not Authorized");
+              }
+    
+            const newAppointment = await appointmentTable.create({
+                data:{
+                    doctorId:appointment.doctorId,
+                    appointment_date: appointment.appointment_date,
+                    patentId: appointment.patentId
+                }
+            });
+    
+            return newAppointment;
+
+        } catch (error) {
+            
+            throw error;
+        }
+
+        
     },
-    viewDoctors: function (patentId: number): Promise<void> {
-        throw new Error("Function not implemented.");
+
+    viewDoctors:async function (patentId: number): Promise<GetDoctor[]> {
+        try {
+            const checkPatentId = await userTable.findFirst(
+                {where:{
+                  id:patentId,
+                  
+                }}
+              )
+        
+              if (!checkPatentId) {
+                throw new Error("You are not Authorized");
+              }
+    
+            const doctors = await userTable.findMany({
+                where: {
+                    role: Role.DOCTOR,
+                }
+                });
+    
+            return doctors;
+
+        } catch (error) {
+            
+            throw error;
+        }
     },
-    viewAppointments: function (patentId: number): Promise<void> {
-        throw new Error("Function not implemented.");
+
+    viewAppointments:async function (patentId: number): Promise<GetAppointments[]> {
+        
+        try {
+
+            const checkPatentId = await userTable.findFirst(
+                {where:{
+                  id:patentId,
+                  
+                }}
+              )
+        
+              if (!checkPatentId) {
+                throw new Error("You are not Authorized");
+              }
+
+        const appointments = await appointmentTable.findMany({
+            where: {
+                patentId: patentId
+            }
+            });
+
+        return appointments;
+            
+        } catch (error) {
+            
+            throw error;
+        }
+
+        
     }
 }

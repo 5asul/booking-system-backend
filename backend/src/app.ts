@@ -3,6 +3,8 @@ import express from 'express';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes';
 import adminRoutes from './routes/adminRoutes';
+import patentRoutes from './routes/patentRoutes';
+import doctorRoutes from './routes/doctorRoutes';
 const bodyParser = require("body-parser");
 
 
@@ -24,6 +26,8 @@ app.use(express.json({ limit: "10mb" }));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/admin',adminRoutes);
+app.use('/api/patent',patentRoutes);
+app.use('api/doctor',doctorRoutes);
 
 
 

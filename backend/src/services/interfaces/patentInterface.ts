@@ -1,5 +1,7 @@
+import { CreateAppointmentInput, GetAppointments,GetDoctor } from "../../types/patent";
+
 export interface patentInterface{
-    bookAppointment:(patentId:number,doctorId:number,appointmentDate:string)=>Promise<void>;
-    viewDoctors:(patentId:number)=>Promise<void>;
-    viewAppointments:(patentId:number)=>Promise<void>
+    bookAppointment:(appointment:CreateAppointmentInput)=>Promise<GetAppointments>;
+    viewDoctors:(patentId:number)=>Promise<GetDoctor[]>;
+    viewAppointments:(patentId:number)=>Promise<GetAppointments[]>
 }

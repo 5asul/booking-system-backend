@@ -1,5 +1,5 @@
 import { User } from "@prisma/client"
-import { CreateDoctorInput } from "../../types/user";
+import { CreateDoctorInput } from "../../types/admin";
 
 
 export interface AdminInterface {

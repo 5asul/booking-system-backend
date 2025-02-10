@@ -10,7 +10,7 @@ export const AdminController: {
   /**
    * Update the status of a doctor.
    */
-  updateDoctorStatus: (async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  updateDoctorStatus: (async (req: Request, res: Response,): Promise<void> => {
     try {
       const doctorId = parseInt(req.params.doctorId);
       const { status } = req.body;

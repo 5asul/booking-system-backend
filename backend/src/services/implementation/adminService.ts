@@ -3,7 +3,7 @@ import { User } from '@prisma/client';
 import {userTable,prisma} from '../../config/db';
 import { AdminInterface } from '../interfaces/adminInterface';
 import { Role } from '../../models/Role';
-import { CreateDoctorInput } from '../../types/user';
+import { CreateDoctorInput } from '../../types/admin';
 
 
 export const AdminService:AdminInterface ={
