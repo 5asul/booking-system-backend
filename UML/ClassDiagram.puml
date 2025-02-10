@@ -4,30 +4,24 @@ class User {
   +username: String
   +email: String
   +password: String
+  +role: String
   +createdAt: DateTime
 }
 
-class BlogPost {
+class Appointment {
   +id: int
-  +title: String
-  +content: String
-  +status: PostStatus
+  +patentId: int 
+  +doctorId: int
+  +description: String
+  +appointment_date: string
+  +status: boolean
   +createdAt: DateTime
 }
 
-class Comment {
-  +id: int
-  +content: String
-  +createdAt: DateTime
-}
 
-enum PostStatus {
-  DRAFT
-  PUBLISHED
-  ARCHIVED
-}
 
-User "1" --> "0..*" BlogPost : writes
-BlogPost "1" --> "0..*" Comment : has
-User "1" --> "0..*" Comment : writes
+
+
+User "1" --> "0..*" Appointment : writes
+ 
 @enduml

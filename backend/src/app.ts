@@ -1,9 +1,10 @@
 
 import express from 'express';
 import cors from 'cors';
-import visitorRoutes from './routes/visitorRoutes';
+import authRoutes from './routes/authRoutes';
+import adminRoutes from './routes/adminRoutes';
 const bodyParser = require("body-parser");
-import authorRoutes from './routes/authorRoutes';
+
 
 const app = express();
 // const corsOptions = {
@@ -21,9 +22,11 @@ app.use(express.json({ limit: "10mb" }));
 
 
 
-app.use('/api/visitor', visitorRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/admin',adminRoutes);
 
-app.use('/api/author', authorRoutes);
+
+
 
 // Add this AFTER all routes
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
