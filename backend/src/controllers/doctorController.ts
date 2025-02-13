@@ -6,17 +6,17 @@ export const DoctorController:{
     viewAppointments:RequestHandler;
 
 } = {
-    
+
     viewAppointments: (async (req: Request, res: Response,): Promise<void> =>{
         try {
-            const patentId = (req as any).user.userId;
+            const doctorId = (req as any).user.userId;
 
-            if (!patentId) {
+            if (!doctorId) {
                 res.status(HTTP_STATUS.UNAUTHORIZED).json({ message: 'Invalid patentId' });
                 return;
               }
             
-            const appointments = await doctorService.viewAppointments(patentId);
+            const appointments = await doctorService.viewAppointments(doctorId);
             res.status(HTTP_STATUS.OK).json(appointments);
         
         } catch (error: any) {

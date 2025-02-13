@@ -5,6 +5,6 @@ import { Role } from "../../models/Role";
 
 export interface AuthInterface {
     login: (email: string, password: string) => Promise<{ user: User; token: string }>;
-    register: (username: string, email: string, password: string, role:Role) => Promise<void>;
+    register: (username: string, email: string, password: string) => Promise<void>;
   }
   

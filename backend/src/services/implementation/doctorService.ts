@@ -1,4 +1,5 @@
 import {userTable,appointmentTable} from '../../config/db';
+import { Role } from '../../models/Role';
 import { GetAppointments } from '../../types/doctor';
 import { doctorInterface } from '../interfaces/doctorInterface';
 
@@ -7,14 +8,15 @@ export const doctorService:doctorInterface ={
 
   viewAppointments:async function (doctorId: number): Promise<GetAppointments[]> {
     try {
-      const checkPatentId = await userTable.findFirst(
+      const checkDoctorId = await userTable.findFirst(
         {where:{
           id:doctorId,
+          role: Role.DOCTOR,
           
         }}
       )
   
-      if (!checkPatentId) {
+      if (!checkDoctorId) {
         throw new Error("You are not Authorized");
       }
   

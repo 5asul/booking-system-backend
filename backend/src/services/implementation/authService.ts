@@ -27,13 +27,13 @@ export const AuthService: AuthInterface = {
       throw error;
     }
   },
-  register: async function (username: string, email: string, password: string, role: Role): Promise<void> {
+  register: async function (username: string, email: string, password: string,): Promise<void> {
 
     try {
       await userTable.create({
-        data: { username, email, password,role },
+        data: { username, email, password,role:Role.PATIENT },
       });
-      
+
     } catch (error) {
 
       throw error;

@@ -11,12 +11,26 @@ export const patentService:patentInterface={
             const checkPatentId = await userTable.findFirst(
                 {where:{
                   id:appointment.patentId,
+                  role:Role.PATIENT
                   
                 }}
               )
         
               if (!checkPatentId) {
                 throw new Error("You are not Authorized");
+              }
+
+            const checkDoctorId = await userTable.findFirst(
+                {
+                    where:{
+                        id:appointment.doctorId,
+                        role:Role.DOCTOR
+                    }
+                }
+            )
+
+            if (!checkDoctorId) {
+                throw new Error("No such a Doctor");
               }
     
             const newAppointment = await appointmentTable.create({
@@ -42,6 +56,7 @@ export const patentService:patentInterface={
             const checkPatentId = await userTable.findFirst(
                 {where:{
                   id:patentId,
+                  role:Role.PATIENT
                   
                 }}
               )
@@ -71,6 +86,7 @@ export const patentService:patentInterface={
             const checkPatentId = await userTable.findFirst(
                 {where:{
                   id:patentId,
+                  role:Role.PATIENT
                   
                 }}
               )
@@ -81,7 +97,13 @@ export const patentService:patentInterface={
 
         const appointments = await appointmentTable.findMany({
             where: {
-                patentId: patentId
+                patentId: patentId,
+                doctor:{
+                    role:Role.DOCTOR
+                }
+            },
+            include:{
+                doctor:true
             }
             });
 

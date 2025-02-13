@@ -27,7 +27,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use('/api/auth', authRoutes);
 app.use('/api/admin',adminRoutes);
 app.use('/api/patent',patentRoutes);
-app.use('api/doctor',doctorRoutes);
+app.use('/api/doctor',doctorRoutes);
 
 
 

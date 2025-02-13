@@ -4,6 +4,8 @@ class User {
   +username: String
   +email: String
   +password: String
+  +status: boolean
+  +specialist:String
   +role: String
   +createdAt: DateTime
 }
@@ -12,7 +14,6 @@ class Appointment {
   +id: int
   +patentId: int 
   +doctorId: int
-  +description: String
   +appointment_date: string
   +status: boolean
   +createdAt: DateTime
