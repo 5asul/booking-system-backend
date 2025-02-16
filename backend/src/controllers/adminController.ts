@@ -34,15 +34,15 @@ export const AdminController: {
    */
   addDoctor: (async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { username, email, password, specialist } = req.body;
+      const { username, email, password, specialist,workingTime } = req.body;
       const adminId = (req as any).user?.userId;
 
-      if (!username || !email || !password || !specialist || !adminId) {
+      if (!username || !email || !password || !specialist ||!workingTime || !adminId) {
         res.status(400).json({ message: 'Missing required fields' });
         return;
       }
 
-      const doctor = { username, email, password, specialist };
+      const doctor = { username, email, password, specialist,workingTime };
       const createdDoctor = await AdminService.addDoctor(doctor, adminId);
       res.status(201).json(createdDoctor);
     } catch (error: any) {

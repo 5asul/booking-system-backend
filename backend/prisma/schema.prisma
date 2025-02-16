@@ -33,6 +33,7 @@ model User {
   password   String
   status     Boolean   @default(true)
   specialist String?
+  workingTime String?
   role       Role      @default(ADMIN)
   createdAt  DateTime  @default(now())
   updatedAt DateTime @updatedAt

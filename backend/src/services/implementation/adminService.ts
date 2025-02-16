@@ -1,6 +1,6 @@
 
 import { User } from '@prisma/client';
-import {userTable,prisma} from '../../config/db';
+import {userTable} from '../../config/db';
 import { AdminInterface } from '../interfaces/adminInterface';
 import { Role } from '../../models/Role';
 import { CreateDoctorInput } from '../../types/admin';
@@ -57,6 +57,7 @@ export const AdminService:AdminInterface ={
           email: doctor.email,
           password: doctor.password,
           specialist:doctor.specialist,
+          workingTime:doctor.workingTime,
           role: Role.DOCTOR
         }
       }) 

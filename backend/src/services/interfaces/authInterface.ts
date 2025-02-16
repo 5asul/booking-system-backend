@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { Role } from "../../models/Role";
+
 
 // src/services/authInterface.ts
 
