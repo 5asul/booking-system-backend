@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { AdminService } from '../services/implementation/adminService';
+import { validationResult } from 'express-validator';
 
 export const AdminController: {
   updateDoctorStatus: RequestHandler;
@@ -12,6 +13,7 @@ export const AdminController: {
    */
   updateDoctorStatus: (async (req: Request, res: Response,): Promise<void> => {
     try {
+      
       const doctorId = parseInt(req.params.doctorId);
       const { status } = req.body;
       const adminId = (req as any).user?.userId; // Ensure req.user exists
@@ -34,6 +36,11 @@ export const AdminController: {
    */
   addDoctor: (async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        res.status(400).json({ errors: errors.array() });
+        return;
+    }
       const { username, email, password, specialist,workingTime } = req.body;
       const adminId = (req as any).user?.userId;
 

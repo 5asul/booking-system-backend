@@ -111,6 +111,7 @@ export const patentService:patentInterface={
                         username:true,
                         role:false,
                         email:true,
+                        specialist:true,
                         password:false,
                         createdAt:true,
                         updatedAt:true

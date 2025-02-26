@@ -1,6 +1,8 @@
 import {Request, Response, RequestHandler } from "express"
 import { patentService } from "../services/implementation/patentService";
 import { HTTP_STATUS } from "../constants/statusCodes";
+import { validateBooking } from "../middlewares/validatorMiddleware";
+import { validationResult } from "express-validator";
 
 
 export const PatentController :{
@@ -11,15 +13,20 @@ export const PatentController :{
 }= {
 
     bookAppointment: (async (req: Request, res: Response, ): Promise<void> => {
-        try {
+      
+      
+      
+      
+      
+      try {
           const { appointment_date , doctorId } = req.body;
           const patentId = (req as any).user.userId;
     
-          if (!doctorId || !appointment_date || !patentId ) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json({ message: 'Missing required fields' });
+          const errors = validationResult(req);
+          if (!errors.isEmpty()) {
+            res.status(400).json({ errors: errors.array() });
             return;
-          }
-    
+        }
           const appointment = {appointment_date, doctorId, patentId};
           const book = await patentService.bookAppointment(appointment);
           res.status(HTTP_STATUS.CREATED).json(book);
