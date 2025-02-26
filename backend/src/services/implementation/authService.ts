@@ -19,7 +19,7 @@ export const AuthService: AuthInterface = {
     const token = jwt.sign(
       { userId: user.id },
       process.env.JWT_SECRET as string,
-      { expiresIn: '1h' }
+      { expiresIn: '2h' }
     );
     return { user, token };
 
