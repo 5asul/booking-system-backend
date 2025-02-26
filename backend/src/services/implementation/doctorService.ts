@@ -13,14 +13,25 @@ export const doctorService:doctorInterface ={
           id:doctorId,
           role: Role.DOCTOR,
           
-        }}
+        }
+      }
       )
   
       if (!checkDoctorId) {
         throw new Error("You are not Authorized");
       }
   
-      const appointments = await appointmentTable.findMany({where:{doctorId}});
+      const appointments = await appointmentTable.findMany({
+        where:{doctorId},
+        include:{
+          patent:{
+              select:{
+                  password:false
+              }
+          }
+          
+      },
+      });
       return appointments;
 
     } catch (error) {

@@ -7,4 +7,5 @@ export interface AdminInterface {
     addDoctor:(doctor:CreateDoctorInput,adminId:number) => Promise<User>;
     deleteDoctors:(doctorId:number,adminId:number) => Promise<void>;
     viewDoctors:(adminId:number)=>Promise<User[]>;
+    
 }

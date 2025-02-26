@@ -88,7 +88,9 @@ export const patentService:patentInterface={
                   id:patentId,
                   role:Role.PATIENT
                   
-                }}
+                },
+                
+            }
               )
         
               if (!checkPatentId) {
@@ -102,9 +104,16 @@ export const patentService:patentInterface={
                     role:Role.DOCTOR
                 }
             },
+            
             include:{
-                doctor:true
-            }
+                doctor:{
+                    select:{
+                        password:false
+                    }
+                }
+                
+            },
+            
             });
 
         return appointments;
