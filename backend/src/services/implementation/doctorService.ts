@@ -26,7 +26,13 @@ export const doctorService:doctorInterface ={
         include:{
           patent:{
               select:{
-                  password:false
+                id:true,
+                username:true,
+                role:false,
+                email:true,
+                password:false,
+                createdAt:true,
+                updatedAt:true
               }
           }
           

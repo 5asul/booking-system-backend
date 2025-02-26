@@ -104,16 +104,19 @@ export const patentService:patentInterface={
                     role:Role.DOCTOR
                 }
             },
-            
             include:{
                 doctor:{
                     select:{
-                        password:false
+                        id:true,
+                        username:true,
+                        role:false,
+                        email:true,
+                        password:false,
+                        createdAt:true,
+                        updatedAt:true
                     }
                 }
-                
-            },
-            
+            }
             });
 
         return appointments;
