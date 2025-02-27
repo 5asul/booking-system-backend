@@ -13,4 +13,6 @@ export function errorHandler(err: CustomError, req: Request, res: Response, next
     success: false,
     message: err.message || "Internal Server Error",
   });
+  
+
 }

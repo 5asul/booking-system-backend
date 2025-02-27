@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "build": "npm install --production=false && npm run vercel-build",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --passWithNoTests",
     "start": "npx nodemon",
     "vercel-build": "prisma migrate deploy && tsc --noEmit",
     "type-check": "tsc --noEmit",
@@ -15,6 +15,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@jest/globals": "^29.7.0",
     "@prisma/client": "^6.3.1",
     "@vercel/node": "^5.1.0",
     "cors": "^2.8.5",
@@ -34,6 +35,12 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/express-validator": "^3.0.2",
-    "@types/jsonwebtoken": "^9.0.8"
+    "@types/jest": "^29.5.14",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/supertest": "^6.0.2",
+    "jest": "^29.7.0",
+    "jest-mock-extended": "4.0.0-beta1",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.6"
   }
 }

@@ -44,17 +44,13 @@ export const AdminController: {
       const { username, email, password, specialist,workingTime } = req.body;
       const adminId = (req as any).user?.userId;
 
-      if (!username || !email || !password || !specialist ||!workingTime || !adminId) {
-        res.status(400).json({ message: 'Missing required fields' });
-        return;
-      }
+      
 
       const doctor = { username, email, password, specialist,workingTime };
       const createdDoctor = await AdminService.addDoctor(doctor, adminId);
       res.status(201).json(createdDoctor);
-    } catch (error: any) {
-      console.error("Error in addDoctor:", error);
-      res.status(500).json({ message: error.message });
+    } catch (error) {
+      next(error);
     }
   }) as RequestHandler,
 
@@ -73,9 +69,8 @@ export const AdminController: {
 
       await AdminService.deleteDoctors(doctorId, adminId);
       res.status(200).json({ message: "Doctor deleted successfully" });
-    } catch (error: any) {
-      console.error("Error in deleteDoctor:", error);
-      res.status(500).json({ message: error.message });
+    } catch (error) {
+      next(error);
     }
   }) as RequestHandler,
 
@@ -93,9 +88,8 @@ export const AdminController: {
 
       const doctors = await AdminService.viewDoctors(adminId);
       res.status(200).json(doctors);
-    } catch (error: any) {
-      console.error("Error in viewDoctors:", error);
-      res.status(500).json({ message: error.message });
+    } catch (error) {
+      next(error);
     }
   }) as RequestHandler,
 };
