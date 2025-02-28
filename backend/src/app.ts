@@ -22,7 +22,9 @@ app.use(cors());
 
 app.use(express.json({ limit: "10mb" }));
 
-
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/auth',authRoutes  );
 app.use('/api/admin',adminRoutes);
