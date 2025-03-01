@@ -5,6 +5,7 @@ import authRoutes from './routes/authRoutes';
 import adminRoutes from './routes/adminRoutes';
 import patentRoutes from './routes/patentRoutes';
 import doctorRoutes from './routes/doctorRoutes';
+import { errorHandler } from './middlewares/errorHandler';
 const bodyParser = require("body-parser");
 
 
@@ -22,6 +23,7 @@ app.use(cors());
 
 app.use(express.json({ limit: "10mb" }));
 
+app.use(errorHandler)
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

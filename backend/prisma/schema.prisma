@@ -45,6 +45,7 @@ model User {
 // Appointment Model
 model Appointment {
   id                Int        @id @default(autoincrement())
+  patent_name       String
   appointment_date  String
   status            Boolean @default(true)
   createdAt         DateTime   @default(now())

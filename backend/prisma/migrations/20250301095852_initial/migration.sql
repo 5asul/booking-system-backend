@@ -7,7 +7,9 @@ CREATE TABLE "User" (
     "username" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
+    "status" BOOLEAN NOT NULL DEFAULT true,
     "specialist" TEXT,
+    "workingTime" TEXT,
     "role" "Role" NOT NULL DEFAULT 'ADMIN',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -18,6 +20,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Appointment" (
     "id" SERIAL NOT NULL,
+    "patent_name" TEXT NOT NULL,
     "appointment_date" TEXT NOT NULL,
     "status" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

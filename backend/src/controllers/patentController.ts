@@ -1,7 +1,6 @@
-import {Request, Response, RequestHandler } from "express"
+import {Request, Response, RequestHandler, NextFunction } from "express"
 import { patentService } from "../services/implementation/patentService";
 import { HTTP_STATUS } from "../constants/statusCodes";
-import { validateBooking } from "../middlewares/validatorMiddleware";
 import { validationResult } from "express-validator";
 
 
@@ -12,14 +11,14 @@ export const PatentController :{
     viewAppointments:RequestHandler
 }= {
 
-    bookAppointment: (async (req: Request, res: Response, ): Promise<void> => {
+    bookAppointment: (async (req: Request, res: Response,next:NextFunction ): Promise<void> => {
       
       
       
       
       
       try {
-          const { appointment_date , doctorId } = req.body;
+          const { appointment_date,patent_name , doctorId } = req.body;
           const patentId = (req as any).user.userId;
     
           const errors = validationResult(req);
@@ -27,12 +26,11 @@ export const PatentController :{
             res.status(400).json({ errors: errors.array() });
             return;
         }
-          const appointment = {appointment_date, doctorId, patentId};
+          const appointment = {appointment_date,patent_name, doctorId, patentId};
           const book = await patentService.bookAppointment(appointment);
           res.status(HTTP_STATUS.CREATED).json(book);
-        } catch (error: any) {
-          console.error("Error in Booking Appointment:", error);
-          res.status(500).json({ message: error.message });
+        } catch (error) {
+          next(error);
         }
       }) as RequestHandler,
 

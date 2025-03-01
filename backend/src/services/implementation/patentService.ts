@@ -10,7 +10,7 @@ export const patentService:patentInterface={
         try {
             const checkPatentId = await userTable.findFirst(
                 {where:{
-                  id:appointment.patentId,
+                  id:Number(appointment.patentId),
                   role:Role.PATIENT
                   
                 }}
@@ -23,7 +23,7 @@ export const patentService:patentInterface={
             const checkDoctorId = await userTable.findFirst(
                 {
                     where:{
-                        id:appointment.doctorId,
+                        id:Number(appointment.doctorId),
                         role:Role.DOCTOR
                     }
                 }
@@ -35,9 +35,10 @@ export const patentService:patentInterface={
     
             const newAppointment = await appointmentTable.create({
                 data:{
-                    doctorId:appointment.doctorId,
+                    doctorId:Number(appointment.doctorId),
                     appointment_date: appointment.appointment_date,
-                    patentId: appointment.patentId
+                    patent_name: appointment.patent_name,
+                    patentId: Number(appointment.patentId)
                 }
             });
     
