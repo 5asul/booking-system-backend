@@ -92,7 +92,7 @@ export const AdminService:AdminInterface ={
       throw error;
     }
   },
-  viewDoctors:async function (adminId: number): Promise<User[]> {
+  viewUsers:async function (adminId: number): Promise<User[]> {
     try {
       const checkAdminId = await userTable.findFirst(
         {where:{
@@ -107,13 +107,15 @@ export const AdminService:AdminInterface ={
       // Fetch doctors from the user table
       const doctors = await userTable.findMany({
         where: {
-          role: Role.DOCTOR,
+          role: {
+            in: [Role.DOCTOR, Role.PATIENT],
+          },
         },
       });
 
       // Check if there are any doctors
       if (doctors.length === 0) {
-        throw new Error("No doctors found");
+        throw new Error("No Users found");
       }
       
       return doctors;

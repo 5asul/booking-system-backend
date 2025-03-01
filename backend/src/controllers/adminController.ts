@@ -6,7 +6,7 @@ export const AdminController: {
   updateDoctorStatus: RequestHandler;
   addDoctor: RequestHandler;
   deleteDoctor: RequestHandler;
-  viewDoctors: RequestHandler;
+  viewUsers: RequestHandler;
 } = {
   /**
    * Update the status of a doctor.
@@ -77,7 +77,7 @@ export const AdminController: {
   /**
    * View all doctors.
    */
-  viewDoctors: (async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  viewUsers: (async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const adminId = (req as any).user?.userId;
 
@@ -86,7 +86,7 @@ export const AdminController: {
         return;
       }
 
-      const doctors = await AdminService.viewDoctors(adminId);
+      const doctors = await AdminService.viewUsers(adminId);
       res.status(200).json(doctors);
     } catch (error) {
       next(error);
